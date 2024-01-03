@@ -335,7 +335,22 @@ class Maincontroller extends CI_Controller
             return redirect('MainController/course');
         }
     }
-
+    public function student()
+    {
+        if ($this->session->userdata('id')) {
+            $data = array();
+            // $data['users'] = $this->Modschool->viewdata();
+            $data['course'] = $this->Modschool->getcoursedata();
+            $this->load->view('admin/header');
+            $this->load->view('admin/navtop');
+            $this->load->view('admin/navleft');
+            $this->load->view('course', $data);
+            $this->load->view('admin/footer');
+        } else {
+            $this->session->set_flashdata('error', 'Please fill all the fields');
+            redirect('MainController/login');
+        }
+    }
 
     // public function info()
     // {
