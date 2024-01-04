@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper"  style="background-image:url('<?php echo base_url('assets/img/two.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -29,17 +29,17 @@
             <form action="<?php echo base_url('MainController/editclass/' . $users['id']); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Edit Class Name</label>
+                        <label for=""><font color="yellow">Edit Class Name</font></label>
                         <input type="text" name="name" id="" value="<?php echo set_value('name', $users['classname']); ?>" class="form-control">
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Enter Category Name</label>
+                        <label for=""><font color="yellow">Enter Category Name</font></label>
                         <select name="catname" id="catname" class="form-control">
                             <option><?php echo set_value('cat', $users['catname']); ?></option>
                             <?php foreach ($category as $c1) { ?>
-                                <option value="<?php echo $c1['name'] ?>"><?php echo $c1['name'] ?></option>
+                                <option value="<?php echo $c1['name'] ?>"></option>
                             <?php } ?>
 
                         </select>

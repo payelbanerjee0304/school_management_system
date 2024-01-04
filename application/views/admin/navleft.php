@@ -97,7 +97,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="<?php echo base_url('MainController/student') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Student Registration</p>
                             </a>

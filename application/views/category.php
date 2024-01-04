@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper"  style="background-image:url('<?php echo base_url('assets/img/three.webp'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -64,7 +64,7 @@
                             <h1><u>VIEW</u></h1>
                         </div>
 
-                        <thead>
+                        <thead    style= "background-color: #D0E775">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -74,7 +74,7 @@
                             </tr>
                         </thead>
                         <?php echo $this->pagination->create_links(); ?>
-                        <tbody>
+                        <tbody   style= "background-color: #86F0C9">
                             <?php if (!empty($user)) {
                                 foreach ($user as $all) {
                             ?>

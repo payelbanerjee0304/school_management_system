@@ -106,6 +106,13 @@ class Maincontroller extends CI_Controller
 
             $this->load->view('admin/footer');
         }
+        else
+        {
+            $this->session->set_flashdata('error', 'Please fill all the fields');
+            redirect('MainController/login');
+        }
+        
+        
     }
 
     public function search()
@@ -198,7 +205,6 @@ class Maincontroller extends CI_Controller
 
             // echo $this->pagination->create_links();
             $data = array();
-            // $data['classes'] = $this->Modschool->getallclass();
             $data['category'] = $this->Modschool->viewcat();
             $data['classes'] = $this->Modschool->getAlldetailsclass($config['per_page'], $this->uri->segment(3));
             $this->load->view("class", $data);
@@ -338,19 +344,134 @@ class Maincontroller extends CI_Controller
     public function student()
     {
         if ($this->session->userdata('id')) {
-            $data = array();
-            // $data['users'] = $this->Modschool->viewdata();
-            $data['course'] = $this->Modschool->getcoursedata();
+            // $data = array();
+            // $data['user'] = $this->Modschool->viewstudentdata();
+            
+
             $this->load->view('admin/header');
             $this->load->view('admin/navtop');
             $this->load->view('admin/navleft');
-            $this->load->view('course', $data);
+
+            $this->load->library('pagination');
+
+            $config['base_url'] = base_url('Maincontroller/student/');
+            $config['total_rows'] = $this->Modschool->getTotalRowsstudent();
+            // print_r();
+            // die;
+            $config['per_page'] = 3;
+
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['next_tag_open'] = '<li class="page-item">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_tag_open'] = '<li class="page-item">';
+            $config['prev_tag_close'] = '</li>';
+            $config['num_tag_open'] = '<li class="page-item">';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+            $config['cur_tag_close'] = '</li>';
+            $config['attributes'] = array('class' => 'page-link');
+
+            $this->pagination->initialize($config);
+
+            $data = array();
+            $data['category'] = $this->Modschool->viewcat();
+            $data['class'] = $this->Modschool->viewclass();
+            
+            $data['user'] = $this->Modschool->getAlldetailsstudent($config['per_page'], $this->uri->segment(3));
+            $this->load->view("student", $data);
+            // $this->load->view('student', $data);
             $this->load->view('admin/footer');
+
         } else {
             $this->session->set_flashdata('error', 'Please fill all the fields');
             redirect('MainController/login');
         }
     }
+
+    public function searchstudent()
+    {
+        $keyword = $this->input->post('keyword');
+        // echo $keyword;
+        // die;
+
+        // Load your model to interact with the database
+        $this->load->model('Modschool');
+        $data = array();
+
+        // Perform the search
+        $data['results'] = $this->Modschool->searchstudent($keyword);
+
+        // Load the view with search results
+        $this->load->view('resultstudent_view', $data);
+        // print_r($data);
+    }
+
+    public function studentinsert()
+    {
+        $this->form_validation->set_rules('name', 'Enter Student Name', 'required');
+        $this->form_validation->set_rules('fname', 'Enter Father Name', 'required');
+        $this->form_validation->set_rules('email', 'Enter Email id', 'required');
+        $this->form_validation->set_rules('password', 'Enter Password', 'required');
+        $this->form_validation->set_rules('catname', 'Enter Category Name', 'required');
+        $this->form_validation->set_rules('classname', 'Enter Class Name', 'required');
+        $this->form_validation->set_rules('dob', 'Enter Date of Birth', 'required');
+        $this->form_validation->set_rules('pendingfees', 'Pending Fees', 'required');
+        $this->form_validation->set_rules('joindate', 'Enter Join Date', 'required');
+
+        if ($this->form_validation->run() == TRUE) {
+            $data['name'] = $this->input->post('name');
+            $data['fname'] = $this->input->post('fname');
+            $data['email'] = $this->input->post('email');
+            $data['password'] = md5($this->input->post('password'));
+            $data['category'] = $this->input->post('catname');
+            $data['class'] = $this->input->post('classname');
+            $data['dob'] = $this->input->post('dob');
+            $data['pendingfees'] = $this->input->post('pendingfees');
+            $data['joindate'] = $this->input->post('joindate');
+            // print_r($data);
+            $insert = $this->Modschool->insertstudent($data);
+            echo json_encode($insert);
+        }
+        
+    }
+
+    public function deletestudent($id)
+    {
+        $this->Modschool->deletestudent($id);
+        return redirect('MainController/student');
+    }
+
+    public function editstudent($id)
+    {
+        $data = array();
+        $data['category'] = $this->Modschool->viewcat();
+        $data['class'] = $this->Modschool->viewclass();
+        $data['users'] = $this->Modschool->editstudent($id);
+        $this->form_validation->set_rules('name', 'Edit Student Name', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/header');
+            $this->load->view('admin/navtop');
+            $this->load->view('admin/navleft');
+            $this->load->view('editstudent', $data);
+            $this->load->view('admin/footer');
+        } else {
+            $data = array();
+            $data['name'] = $this->input->post('name');
+            $data['fname'] = $this->input->post('fname');
+            $data['email'] = $this->input->post('email');
+            $data['category'] = $this->input->post('catname');
+            $data['class'] = $this->input->post('classname');
+            $data['dob'] = $this->input->post('dob');
+            $data['pendingfees'] = $this->input->post('pendingfees');
+            $data['joindate'] = $this->input->post('joindate');
+            // print_r($data);
+            $this->Modschool->updatestudent($id, $data);
+            return redirect('MainController/student');
+        }
+    }
+
+
 
     // public function info()
     // {

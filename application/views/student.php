@@ -5,15 +5,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Course (<?php echo sizeof($course); ?>)</h1>
+                    <h1 class="m-0 text-dark">Students</h1>
                 </div>
                 <!-- </form> -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
                         <li class="breadcrumb-item">Dashboard v1</li>
-                        <li class="breadcrumb-item">Course Management</li>
-                        <li class="breadcrumb-item active">Course</li>
+                        <li class="breadcrumb-item">Manage Student</li>
+                        <li class="breadcrumb-item active">Student Registration</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -44,7 +44,7 @@
             <div id="searchResults">
                 <div id="showmessage1" class="alert alert-success alert-dismissible" style="display:none">Course Added Successfully</div>
                 <div class="btn btn-warning btn-outline-dark" data-toggle="modal" data-target="#createcar">
-                    <a href="javascript:void(0);" onclick="showmodel();">Add Course</a>
+                    <a href="javascript:void(0);" onclick="showmodel();">Add New Student</a>
                 </div>
                 <!-- Small boxes (Stat box) -->
                 <div class="table-responsiv">
@@ -58,10 +58,15 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Course Name</th>
-                                <th>Duration</th>
-                                <th>Course Fees</th>
-                                <th>Course Started</th>
+                                <th>Name</th>
+                                <th>Father Name</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Category</th>
+                                <th>Class</th>
+                                <th>Date of Birth</th>
+                                <th>Pending Fees</th>
+                                <th>Join Date</th>
                                 <th>Status</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
@@ -69,23 +74,28 @@
                         </thead>
                         <?php echo $this->pagination->create_links(); ?>
                         <tbody>
-                            <?php if (!empty($course)) {
-                                foreach ($course as $all) {
+                            <?php if (!empty($user)) {
+                                foreach ($user as $all) {
                             ?>
                                     <tr>
                                         <td><?php echo $all['id'] ?></td>
-                                        <td><?php echo $all['coursename'] ?></td>
-                                        <td><?php echo $all['duration'] ?></td>
-                                        <td><?php echo $all['coursefees'] ?></td>
-                                        <td><?php echo $all['coursestarted'] ?></td>
+                                        <td><?php echo $all['name'] ?></td>
+                                        <td><?php echo $all['fname'] ?></td>
+                                        <td><?php echo $all['email'] ?></td>
+                                        <td><?php echo $all['password'] ?></td>
+                                        <td><?php echo $all['category'] ?></td>
+                                        <td><?php echo $all['class'] ?></td>
+                                        <td><?php echo $all['dob'] ?></td>
+                                        <td><?php echo $all['pendingfees'] ?></td>
+                                        <td><?php echo $all['joindate'] ?></td>
                                         <td><input type="checkbox" <?php if ($all['status'] == 1) {
                                                                         echo "checked";
                                                                     } ?> name="status" id="" value=""></td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/deletecourse/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="<?php echo base_url('MainController/deletestudent/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/editcourse/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="<?php echo base_url('MainController/editstudent/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
                                         </td>
                                     </tr>
                             <?php }
@@ -104,36 +114,78 @@
         <div class="modal fade" id="createcar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="" method="post" id="createcourse">
+                    <form action="" method="post" id="createstudent">
                         <div id="showmessage" class="alert alert-danger alert-dismissible" style="display:none">Please fill-up all fields</div>
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Name</label>
-                                <input type="text" name="name" id="name" placeholder="Enter Course Name" class="form-control">
+                                <label for="">Enter Student Name</label>
+                                <input type="text" name="name" id="name" placeholder="Enter Student Name" class="form-control">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Duration</label>
-                                <input type="text" class="form-control" name="duration" id="duration" placeholder="Enter Course Duration">
+                                <label for="">Enter Father Name</label>
+                                <input type="text" name="fname" id="fname" placeholder="Enter Father Name" class="form-control">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Fees</label>
-                                <input type="text" class="form-control" name="coursefees" id="coursefees" placeholder="Enter Course Fees">
+                                <label for="">Enter Email</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email id">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Started Date</label>
-                                <input type="date" class="form-control" name="coursestarted" id="coursestarted" placeholder="Enter Course Started Date">
+                                <label for="">Enter Password</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Enter Category Name</label>
+                                <select class="form-control" name="catname" id="catname" placeholder="Enter Category Name">
+                                    <option>Select</option>
+                                    <?php foreach ($category as $cat) { ?>
+                                        <option><?php echo $cat['name'] ?></option>
+
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Enter Class Name</label>
+                                <select class="form-control" name="classname" id="classname" placeholder="Enter Class Name">
+                                    <option>Select</option>
+                                    <?php foreach ($class as $c) { ?>
+                                        <option><?php echo $c['classname'] ?></option>
+
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Enter Date of Birth</label>
+                                <input type="date" class="form-control" name="dob" id="dob" placeholder="Enter Date of Birth">
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Pending Fees</label>
+                                <input type="number" class="form-control" name="pendingfees" id="pendingfees" placeholder="Pending Fees">
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Enter Join Date</label>
+                                <input type="date" class="form-control" name="joindate" id="joindate" placeholder="Enter Join Date">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -157,19 +209,6 @@
 
 
 
-
-<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
-</script>
-
-
-
-
-
 <script>
     $(document).ready(function() {
         // Attach a click event to the search button
@@ -179,7 +218,7 @@
 
             // Send an AJAX request to the server
             $.ajax({
-                url: "<?= base_url('MainController/searchclass'); ?>",
+                url: "<?= base_url('MainController/searchstudent'); ?>",
                 type: "post",
                 data: {
                     keyword: keyword
@@ -204,11 +243,11 @@
     }
 
 
-    $('#createcourse').submit(function(e) {
+    $('#createstudent').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            url: "<?php echo base_url('MainController/courseinsert'); ?>",
-            data: $('#createcourse').serialize(),
+            url: "<?php echo base_url('MainController/studentinsert'); ?>",
+            data: $('#createstudent').serialize(),
             type: "post",
             datatype: 'JSON',
             success: function(response) {
@@ -229,21 +268,6 @@
         })
     });
 </script>
-<!-- <script>
-    var array = ["2024-01-02", "2015-06-15", "2015-06-16"]
-
-    $('#coursestarted').datepicker({
-        beforeShowDay: function(date) {
-            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-            return [array.indexOf(string) == -1]
-        }
-    });
-
-    // $('#document').ready(function() {
-    //     // Disable the input field
-    //     $('#coursestarted').prop('disabled', true);
-    // });
-</script> -->
 
 </body>
 

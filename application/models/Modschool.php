@@ -151,4 +151,70 @@ class Modschool extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('course', $data);
     }
+
+    //view student data
+    public function viewstudentdata()
+    {
+        return $this->db->get('student')->result_array();
+    }
+
+    //To get the category list of values
+    public function viewclass()
+    {
+        return $this->db->get('class')->result_Array();
+    }
+
+    //<pagination purpose>
+    public function getTotalRowsstudent()
+    {
+        $query = $this->db->get("student");
+        return $query->num_rows();
+    }
+    public function getAlldetailsstudent($limit, $offset)
+    {
+        $query = $this->db->limit($limit, $offset);
+        $query = $this->db->get("student");
+        if ($query) {
+            return $query->result_Array();
+        }
+    }
+    //<!pagination purpose>
+
+    //<search purpose>
+    public function searchstudent($keyword)
+    {
+        $this->db->like('name', $keyword);
+        $this->db->or_like('fname', $keyword);
+        $this->db->or_like('email', $keyword);
+
+        $query = $this->db->get('student');
+
+        return $query->result_Array();
+    }
+    //<!search purpose>
+
+    public function insertstudent($data)
+    {
+        $this->db->insert('student', $data);
+    }
+
+    public function deletestudent($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('student');
+        return $this->db->get('student')->result_Array();
+    }
+
+    public function editstudent($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('student')->row_array();
+    }
+
+    public function updatestudent($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('student', $data);
+    }
+
 }

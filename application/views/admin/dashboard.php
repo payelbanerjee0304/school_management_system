@@ -1,9 +1,8 @@
-<link rel="stylesheet" href="css/custom.css" />
 
 
-<body style="background-image:url('<?php echo base_url('assets/img/one.jpg'); ?>'); background-repeat:no-repeat; background: size 1350px;">
+<body>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper"  style="background-image:url('<?php echo base_url('assets/img/images1.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
