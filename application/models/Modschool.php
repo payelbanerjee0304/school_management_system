@@ -225,7 +225,7 @@ class Modschool extends CI_Model
     {
         $this->db->insert('staff', $data);
     }
-    public function create_post($post_image)
+    public function staffinsert($post_image)
     {
         
         $data = array(
@@ -238,5 +238,22 @@ class Modschool extends CI_Model
             'image' => str_replace(' ', '', $post_image)
         );
         return $this->db->insert('staff', $data);
+    }
+    public function deletestaff($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('staff');
+        return $this->db->get('staff')->result_Array();
+    }
+    public function editstaff($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('staff')->row_array();
+    }
+
+    public function updatestaff($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('staff', $data);
     }
 }

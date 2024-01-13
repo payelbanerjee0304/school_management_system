@@ -52,7 +52,7 @@
                     <table border="1" cellpadding="20" cellspacing="0" class="table table-striped" id="mytable">
 
                         <div class="text-center">
-                            <h1><u>VIEW</u></h1>
+                        <h1><u>VIEW</u></h1>
                         </div>
 
                         <thead   style= "background-color: #D0E775">
@@ -82,7 +82,7 @@
                                         <td><?php echo $all['dob'] ?></td>
                                         <td><?php echo $all['phone'] ?></td>
                                         <td><?php echo $all['doj'] ?></td>
-                                        <td><img class="post-thumb" src="<?php echo base_url(); ?>uploads/<?php echo $all['image']; ?>" height="100px" alt="Uploaded Image"></td>
+                                        <td><img class="post-thumb" src="<?php echo base_url(); ?>assets/staffimages/<?php echo $all['image']; ?>" height="100px" alt="Uploaded Image"></td>
                                             <td><a href="<?php echo base_url('deletestaff/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                         <td>
@@ -152,7 +152,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for=""><font color="yellow">Profile Picture</font></label>
-                                <input type="file"  name="userfile" id="userfile" size="20">
+                                <input type="file"  name="userfile" id="userfile" class="form-control">
                             </div>
                         </div>
                         <div class="modal-footer">

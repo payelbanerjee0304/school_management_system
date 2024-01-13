@@ -77,11 +77,14 @@ $route['editcategory/(:num)'] = 'MainController/editcategory/$1';
 $route['editclass/(:num)'] = 'MainController/editclass/$1';
 $route['editcourse/(:num)'] = 'MainController/editcourse/$1';
 $route['editstudent/(:num)'] = 'MainController/editstudent/$1';
+$route['editstaff/(:num)'] = 'MainController/editstaff/$1';
+
 
 $route['deletecategory/(:num)']= 'MainController/deletecategory/$1';
 $route['deleteclass/(:num)']= 'MainController/deleteclass/$1';
 $route['deletecourse/(:num)']= 'MainController/deletecourse/$1';
 $route['deletestudent/(:num)']= 'MainController/deletestudent/$1';
+$route['deletestaff/(:num)']= 'MainController/deletestaff/$1';
 
 $route['test'] = 'MainController/test';
 $route['testinsert'] = 'MainController/testinsert';

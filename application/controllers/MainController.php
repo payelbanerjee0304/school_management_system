@@ -499,7 +499,7 @@ class Maincontroller extends CI_Controller
             $this->form_validation->set_rules('doj', 'Enter Date of Joining', 'required');
 
             if ($this->form_validation->run() == TRUE) {
-                $config['upload_path']          = './uploads/';
+                $config['upload_path']          = './assets/staffimages/';
                 $config['allowed_types']        = 'gif|jpg|png';
                 $config['max_size']             = 100;
                 $config['max_width']            = 1024;
@@ -520,12 +520,45 @@ class Maincontroller extends CI_Controller
                         $post_image = $_FILES['userfile']['name'];
                         // echo "<pre>";
                         // print_r($data);die;
-                        $insert = $this->Modschool->create_post($post_image);
+                        $insert = $this->Modschool->staffinsert($post_image);
                         // echo json_encode($insert);
                         return redirect('staff');
                 }
             }
         }
+
+        public function deletestaff($id)
+        {
+            $this->Modschool->deletestaff($id);
+            return redirect('staff');
+        }
+
+        public function editstaff($id)
+    {
+        $data = array();
+        $data['users'] = $this->Modschool->editstaff($id);
+        $this->form_validation->set_rules('name', 'Edit Staff Name', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/header');
+            $this->load->view('admin/navtop');
+            $this->load->view('admin/navleft');
+            $this->load->view('staff/editstaff', $data);
+            $this->load->view('admin/footer');
+        } else {
+            $data = array();
+            $data['name'] = $this->input->post('name');
+            $data['email'] = $this->input->post('email');
+            $data['address'] = $this->input->post('address');
+
+            $data['dob'] = $this->input->post('dob');
+            $data['phone'] = $this->input->post('phone');
+            $data['doj'] = $this->input->post('doj');
+            $data['image'] = $this->input->post('image');
+            // print_r($data);
+            $this->Modschool->updatestaff($id, $data);
+            return redirect('staff');
+        }
+    }
 
 
         // public function attendance()
