@@ -210,32 +210,6 @@
         $('#createcar').model('show');
     }
 
-    $('#createstaff').submit(function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            url: "<?php echo base_url('MainController/staffinsert'); ?>",
-            data: $('#createstaff').serialize(),
-            type: "post",
-            datatype: 'JSON',
-            success: function(response) {
-                if (response) {
-                    $('#createcar').modal('hide');
-                    alert(response);die;
-                    $('#showmessage1').show();y
-                    setInterval(function() {
-                        location.reload();
-                    }, 3000);
-
-                } else {
-                    $('#showmessage').show();
-                    // setInterval(function() {
-                    //     location.reload();
-                    // }, 3000);
-                }
-            }
-        })
-    });
 </script>
 
 </body>

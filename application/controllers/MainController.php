@@ -528,19 +528,19 @@ class Maincontroller extends CI_Controller
         }
 
 
-        public function attendance()
-        {
-            if ($this->session->userdata('id')) {
-                $this->load->view('admin/header');
-                $this->load->view('admin/navtop');
-                $this->load->view('admin/navleft');
-                $this->load->view('admin/attendance');
-                $this->load->view('admin/footer');
-            } else {
-                $this->session->set_flashdata('error', 'Please Login First');
-                redirect('login');
-            }
-        }
+        // public function attendance()
+        // {
+        //     if ($this->session->userdata('id')) {
+        //         $this->load->view('admin/header');
+        //         $this->load->view('admin/navtop');
+        //         $this->load->view('admin/navleft');
+        //         $this->load->view('admin/attendance');
+        //         $this->load->view('admin/footer');
+        //     } else {
+        //         $this->session->set_flashdata('error', 'Please Login First');
+        //         redirect('login');
+        //     }
+        // }
 
 
 
