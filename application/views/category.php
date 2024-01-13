@@ -73,7 +73,7 @@
                                 <th>Edit</th>
                             </tr>
                         </thead>
-                        <?php echo $this->pagination->create_links(); ?>
+                        <?php echo $this->pagination->create_links(1); ?>
                         <tbody   style= "background-color: #86F0C9">
                             <?php if (!empty($user)) {
                                 foreach ($user as $all) {
@@ -88,7 +88,7 @@
                                             <a href="<?php echo base_url('MainController/deletecategory/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/editcategory/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="<?php echo base_url('editcategory/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
                                         </td>
                                     </tr>
                             <?php }
@@ -104,10 +104,10 @@
         <!-- /.content-wrapper -->
 
         <!-- Modal -->
-        <div class="modal fade" id="createcar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createcar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="" method="post" id="createcategory">
+                    <form action="" method="post" id="createcategory"  style="background-image:url('<?php echo base_url('assets/img/three.webp'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
                         <div id="showmessage" class="alert alert-danger alert-dismissible" style="display:none">Please fill-up all fields</div>
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Category Name</label>
+                                <label for=""><font color="yellow">Enter Category Name</font></label>
                                 <input type="text" name="name" id="" placeholder="Enter Category Name" class="form-control">
                             </div>
                         </div>
@@ -171,7 +171,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable()
     });
 
     function showmodel() {
@@ -203,6 +203,7 @@
             }
         })
     });
+    
 </script>
 
 </body>

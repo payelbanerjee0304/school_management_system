@@ -217,4 +217,26 @@ class Modschool extends CI_Model
         return $this->db->update('student', $data);
     }
 
+    public function getstaffdata()
+    {
+        return $this->db->get('staff')->result_array();
+    }
+    public function insertstaff($data)
+    {
+        $this->db->insert('staff', $data);
+    }
+    public function create_post($post_image)
+    {
+        
+        $data = array(
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'address' => $this->input->post('address'),
+            'dob' => $this->input->post('dob'),
+            'phone' => $this->input->post('phone'),
+            'doj' => $this->input->post('doj'),
+            'image' => str_replace(' ', '', $post_image)
+        );
+        return $this->db->insert('staff', $data);
+    }
 }

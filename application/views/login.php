@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?php echo base_url('MainController/index') ?>"><b>School Management System</b></a>
+            <a href="<?php echo base_url('/') ?>"><b>School Management System</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -35,7 +35,7 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="<?php echo base_url('MainController/loginadmin') ?>" method="post">
+                <form action="<?php echo base_url('loginadmin') ?>" method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">

@@ -26,7 +26,7 @@
 
             <!-- /.content-wrapper -->
 
-            <form action="<?php echo base_url('MainController/editclass/' . $users['id']); ?>" method="post">
+            <form action="<?php echo base_url('editclass/' . $users['id']); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for=""><font color="yellow">Edit Class Name</font></label>
@@ -34,17 +34,16 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for=""><font color="yellow">Enter Category Name</font></label>
-                        <select name="catname" id="catname" class="form-control">
-                            <option><?php echo set_value('cat', $users['catname']); ?></option>
-                            <?php foreach ($category as $c1) { ?>
-                                <option value="<?php echo $c1['name'] ?>"></option>
-                            <?php } ?>
-
-                        </select>
-                    </div>
-                </div>
+                            <div class="form-group">
+                                <label for="">Enter Category Name</label>
+                                <select class="form-control" name="catname" id="catname" placeholder="Enter Category Name">
+                                    <option><?php echo set_value('catname', $users['catname']); ?></option>
+                                    <?php foreach ($category as $cat) { ?>
+                                        <option><?php echo $cat['name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
                 <!--  -->
                 <div class="modal-footer">
                     <input type="submit" name="submit" id="" value="Update" class="btn btn-lg btn-warning">

@@ -1,19 +1,19 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper"  style="background-image:url('<?php echo base_url('assets/img/five.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
+<div class="content-wrapper"  style="background-image:url('<?php echo base_url('assets/img/six.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Students</h1>
+                    <h1 class="m-0 text-dark"><font color="Red">Staff</font></h1>
                 </div>
                 <!-- </form> -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
                         <li class="breadcrumb-item">Dashboard v1</li>
-                        <li class="breadcrumb-item">Manage Student</li>
-                        <li class="breadcrumb-item active">Student Registration</li>
+                        <li class="breadcrumb-item">Manage Staff</li>
+                        <li class="breadcrumb-item active">Staff Registration</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -42,9 +42,9 @@
     <section class="content">
         <div class="container-fluid">
             <div id="searchResults">
-                <div id="showmessage1" class="alert alert-success alert-dismissible" style="display:none">Student Added Successfully</div>
+                <div id="showmessage1" class="alert alert-success alert-dismissible" style="display:none">Staff Added Successfully</div>
                 <div class="btn btn-warning btn-outline-dark" data-toggle="modal" data-target="#createcar">
-                    <a href="javascript:void(0);" onclick="showmodel();">Add New Student</a>
+                    <a href="javascript:void(0);" onclick="showmodel();">Add New Staff</a>
                 </div>
                 <!-- Small boxes (Stat box) -->
                 <div class="table-responsiv">
@@ -59,43 +59,34 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Father Name</th>
                                 <th>Email</th>
-
-                                <th>Category</th>
-                                <th>Class</th>
+                                <th>Address</th>
                                 <th>Date of Birth</th>
-                                <th>Pending Fees</th>
-                                <th>Join Date</th>
-                                <th>Status</th>
+                                <th>Phone</th>
+                                <th>Date of Joining</th>
+                                <th>Profile Picture</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <?php echo $this->pagination->create_links(); ?>
                         <tbody   style= "background-color: #86F0C9">
-                            <?php if (!empty($user)) {
-                                foreach ($user as $all) {
+                            <?php if (!empty($staff)) {
+                                foreach ($staff as $all) {
                             ?>
                                     <tr>
                                         <td><?php echo $all['id'] ?></td>
                                         <td><?php echo $all['name'] ?></td>
-                                        <td><?php echo $all['fname'] ?></td>
                                         <td><?php echo $all['email'] ?></td>
-
-                                        <td><?php echo $all['category'] ?></td>
-                                        <td><?php echo $all['class'] ?></td>
+                                        <td><?php echo $all['address'] ?></td>
                                         <td><?php echo $all['dob'] ?></td>
-                                        <td><?php echo $all['pendingfees'] ?></td>
-                                        <td><?php echo $all['joindate'] ?></td>
-                                        <td><input type="checkbox" <?php if ($all['status'] == 1) {
-                                                                        echo "checked";
-                                                                    } ?> name="status" id="" value=""></td>
-                                        <td>
-                                            <a href="<?php echo base_url('deletestudent/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                        <td><?php echo $all['phone'] ?></td>
+                                        <td><?php echo $all['doj'] ?></td>
+                                        <td><img class="post-thumb" src="<?php echo base_url(); ?>uploads/<?php echo $all['image']; ?>" height="100px" alt="Uploaded Image"></td>
+                                            <td><a href="<?php echo base_url('deletestaff/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('editstudent/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="<?php echo base_url('editstaff/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
                                         </td>
                                     </tr>
                             <?php }
@@ -109,90 +100,67 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        alert($('#userfile').val());die;
+
         <!-- Modal -->
         <div class="modal fade" id="createcar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form action="" method="post" id="createstudent"   style="background-image:url('<?php echo base_url('assets/img/five.jpg'); ?>'); background-repeat:no-repeat; background-size: 1920px; ">
+                <div class="modal-content" style="background-image:url('<?php echo base_url('assets/img/six.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
+                <?php echo form_open_multipart('MainController/do_upload');?>
                         <div id="showmessage" class="alert alert-danger alert-dismissible" style="display:none">Please fill-up all fields</div>
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"><font color="Red">Add Staff</font></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Student Name</label>
+                                <label for=""><font color="yellow">Enter Staff Name</font></label>
                                 <input type="text" name="name" id="name" placeholder="Enter Student Name" class="form-control">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Father Name</label>
-                                <input type="text" name="fname" id="fname" placeholder="Enter Father Name" class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="">Enter Email</label>
+                                <label for=""><font color="yellow">Enter Email</font></label>
                                 <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email id">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
+                                <label for=""><font color="yellow">Enter Address</font></label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="Enter Address">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Category Name</label>
-                                <select class="form-control" name="catname" id="catname" placeholder="Enter Category Name">
-                                    <option>Select</option>
-                                    <?php foreach ($category as $cat) { ?>
-                                        <option><?php echo $cat['name'] ?></option>
-
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="">Enter Class Name</label>
-                                <select class="form-control" name="classname" id="classname" placeholder="Enter Class Name">
-                                    <option>Select</option>
-                                    <?php foreach ($class as $c) { ?>
-                                        <option><?php echo $c['classname'] ?></option>
-
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="">Enter Date of Birth</label>
+                                <label for=""><font color="yellow">Date of Birth</font></label>
                                 <input type="date" class="form-control" name="dob" id="dob" placeholder="Enter Date of Birth">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Pending Fees</label>
-                                <input type="number" class="form-control" name="pendingfees" id="pendingfees" placeholder="Pending Fees">
+                                <label for=""><font color="yellow">Enter Phone No.</font></label>
+                                <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter Phone No.">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Join Date</label>
-                                <input type="date" class="form-control" name="joindate" id="joindate" placeholder="Enter Join Date">
+                                <label for=""><font color="yellow">Enter Date of Joining</font></label>
+                                <input type="date" class="form-control" name="doj" id="doj" placeholder="Enter Date of Joining">
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for=""><font color="yellow">Profile Picture</font></label>
+                                <input type="file"  name="userfile" id="userfile" size="20">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" value="Add" class="btn btn-lg btn-success">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
-                    </form>
+                        <?php echo form_close(); ?>
+                    
                 </div>
             </div>
         </div>
@@ -218,12 +186,12 @@
 
             // Send an AJAX request to the server
             $.ajax({
-                url: "<?= base_url('MainController/searchstudent'); ?>",
+                url: "<?= base_url('MainController/'); ?>",
                 type: "post",
-                data: {
-                    keyword: keyword
-
-                },
+                data:new FormData(this),  
+                contentType: false,  
+                cache: false,  
+                processData:false,  
                 success: function(data) {
                     // alert(data);
                     // console.log(data);
@@ -242,18 +210,19 @@
         $('#createcar').model('show');
     }
 
-
-    $('#createstudent').submit(function(e) {
+    $('#createstaff').submit(function(e) {
         e.preventDefault();
+
         $.ajax({
-            url: "<?php echo base_url('MainController/studentinsert'); ?>",
-            data: $('#createstudent').serialize(),
+            url: "<?php echo base_url('MainController/staffinsert'); ?>",
+            data: $('#createstaff').serialize(),
             type: "post",
             datatype: 'JSON',
             success: function(response) {
                 if (response) {
                     $('#createcar').modal('hide');
-                    $('#showmessage1').show();
+                    alert(response);die;
+                    $('#showmessage1').show();y
                     setInterval(function() {
                         location.reload();
                     }, 3000);

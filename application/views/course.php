@@ -26,15 +26,7 @@
                 <!-- Your main content goes here -->
                 <h1></h1>
             </div>
-            <div class="col-md-4">
-                <!-- Search button on the right -->
-                <span class="form-inline float-right">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword" id="keyword" aria-label="Search">
-                    <button class="btn btn-navbar alert-info" type="submit" id="searchButton">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </span>
-            </div>
+            
         </div>
     </div>
     <!-- Main content -->
@@ -82,10 +74,10 @@
                                                                         echo "checked";
                                                                     } ?> name="status" id="" value=""></td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/deletecourse/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="<?php echo base_url('deletecourse/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/editcourse/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="<?php echo base_url('editcourse/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
                                         </td>
                                     </tr>
                             <?php }
@@ -104,7 +96,7 @@
         <div class="modal fade" id="createcar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="" method="post" id="createcourse">
+                    <form action="" method="post" id="createcourse"   style="background-image:url('<?php echo base_url('assets/img/four.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
                         <div id="showmessage" class="alert alert-danger alert-dismissible" style="display:none">Please fill-up all fields</div>
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
@@ -114,25 +106,25 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Name</label>
+                                <label for=""><font color="blue">Enter Course Name</font></label>
                                 <input type="text" name="name" id="name" placeholder="Enter Course Name" class="form-control">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Duration</label>
+                                <label for=""><font color="blue">Enter Course Duration</font></label>
                                 <input type="text" class="form-control" name="duration" id="duration" placeholder="Enter Course Duration">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Fees</label>
+                                <label for=""><font color="blue">Enter Course Fees</font></label>
                                 <input type="text" class="form-control" name="coursefees" id="coursefees" placeholder="Enter Course Fees">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Course Started Date</label>
+                                <label for=""><font color="blue">Enter Course Started Date</font></label>
                                 <input type="date" class="form-control" name="coursestarted" id="coursestarted" placeholder="Enter Course Started Date">
                             </div>
                         </div>
@@ -165,37 +157,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
 </script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+2:01
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 
 
-
-
-<script>
-    $(document).ready(function() {
-        // Attach a click event to the search button
-        $("#searchButton").on("click", function() {
-            // Get the search keyword
-            var keyword = $("#keyword").val();
-
-            // Send an AJAX request to the server
-            $.ajax({
-                url: "<?= base_url('MainController/searchclass'); ?>",
-                type: "post",
-                data: {
-                    keyword: keyword
-
-                },
-                success: function(data) {
-                    // alert(data);
-                    // console.log(data);
-                    // Display the search results in the container
-                    $("#searchResults").html(data);
-
-                }
-            });
-        });
-    });
-</script>
 
 
 <script>

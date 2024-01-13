@@ -22,7 +22,7 @@
                     <h1><u>VIEW</u></h1>
                 </div>
 
-                <thead>
+                <thead     style= "background-color: #D0E775">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <?php echo $this->pagination->create_links(); ?>
-                <tbody>
+                <tbody   style= "background-color: #86F0C9">
                     <?php
                     foreach ($results as $all) {
                     ?>
@@ -43,10 +43,10 @@
                                                             echo "checked";
                                                         } ?> name="status" id="" value=""></td>
                             <td>
-                                <a href="<?php echo base_url('MainController/delete/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                <a href="<?php echo base_url('delete/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                             <td>
-                                <a href="<?php echo base_url('MainController/editcategory/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="<?php echo base_url('editcategory/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
                             </td>
                         </tr>
                     <?php }

@@ -25,7 +25,7 @@
 
             <!-- /.content-wrapper -->
 
-            <form action="<?php echo base_url('MainController/editcategory/' . $users['id']); ?>" method="post">
+            <form action="<?php echo base_url('editcategory/' . $users['id']); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Edit Category Name</label>

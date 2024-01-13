@@ -78,10 +78,10 @@
                                                                         echo "checked";
                                                                     } ?> name="status" id="" value=""></td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/deleteclass/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="<?php echo base_url('deleteclass/' . $all['id']) ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('MainController/editclass/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="<?php echo base_url('editclass/' . $all['id']) ?>" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
                                         </td>
                                     </tr>
                             <?php }
@@ -100,23 +100,23 @@
         <div class="modal fade" id="createcar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="" method="post" id="createclass">
+                    <form action="" method="post" id="createclass"  style="background-image:url('<?php echo base_url('assets/img/two.jpg'); ?>'); background-repeat:no-repeat; background-size: 100% 100%; ">
                         <div id="showmessage" class="alert alert-danger alert-dismissible" style="display:none">Please fill-up all fields</div>
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add class</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"><font color="yellow">Add class</font></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Class Name</label>
+                                <label for=""><font color="yellow">Enter Class Name</font></label>
                                 <input type="text" name="name" id="name" placeholder="Enter Class Name" class="form-control">
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Enter Category Name</label>
+                                <label for=""><font color="yellow">Enter Category Name</font></label>
                                 <select class="form-control" name="catname" id="catname" placeholder="Enter Category Name">
                                     <option>Select</option>
                                     <?php foreach ($category as $cat) { ?>

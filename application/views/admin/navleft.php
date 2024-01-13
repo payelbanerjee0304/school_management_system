@@ -42,7 +42,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('MainController/category') ?>" class="nav-link">
+                            <a href="<?php echo base_url('category') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Category</p>
                             </a>
@@ -61,7 +61,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('MainController/class') ?>" class="nav-link">
+                            <a href="<?php echo base_url('class') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Class</p>
                             </a>
@@ -79,7 +79,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('MainController/course') ?>" class="nav-link">
+                            <a href="<?php echo base_url('course') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Course</p>
                             </a>
@@ -97,7 +97,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('MainController/student') ?>" class="nav-link">
+                            <a href="<?php echo base_url('student') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Student Registration</p>
                             </a>
@@ -115,7 +115,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="<?php echo base_url('staff') ?>" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Staff</p>
                             </a>
@@ -185,11 +185,12 @@
 </aside>
 <script>
     jQuery(function($) {
-        $(".sidebar > a").click(function() {
-            $(".sidebar").slideUp(200);
-            if ($(this).parent().hasClass("active")) {
-                $(".sidebar").removeClass("active");
-                $(this).parent().removeClass("active");
+        $(".sidebar > a.nav-link").click(function() {
+            $(".sidebar > a.nav-link").slideUp(200);
+            // $(".sidebar").slideUp(200);
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                // $(this).parent().removeClass("active");
             } else {
                 $(".sidebar").removeClass("active");
                 $(this).next(".sidebar").slideDown(200);

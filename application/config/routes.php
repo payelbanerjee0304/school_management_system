@@ -49,6 +49,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'MainController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+// $route['/']='MainController/index';
+$route['index']="MainController/index";
+$route['category/(:num)']="MainController/category/$1";
+$route['category']="MainController/category";
+
+$route['class']="MainController/class";
+$route['class/(:num)']="MainController/class/$1";
+
+$route['course']="MainController/course";
+
+$route['student']="MainController/student";
+$route['student/(:num)']="MainController/student/$1";
+
+$route['staff']="MainController/staff";
+$route['staff/(:num)']="MainController/staff/$1";
+
+$route['login']="MainController/login";
+$route['logout']="MainController/logout";
+$route['loginadmin']="MainController/loginadmin";
+
+$route['do_upload']="MainController/do_upload";
+$route['editcategory/(:num)'] = 'MainController/editcategory/$1';
+$route['editclass/(:num)'] = 'MainController/editclass/$1';
+$route['editcourse/(:num)'] = 'MainController/editcourse/$1';
+$route['editstudent/(:num)'] = 'MainController/editstudent/$1';
+
+$route['deletecategory/(:num)']= 'MainController/deletecategory/$1';
+$route['deleteclass/(:num)']= 'MainController/deleteclass/$1';
+$route['deletecourse/(:num)']= 'MainController/deletecourse/$1';
+$route['deletestudent/(:num)']= 'MainController/deletestudent/$1';
+
+$route['test'] = 'MainController/test';
+$route['testinsert'] = 'MainController/testinsert';

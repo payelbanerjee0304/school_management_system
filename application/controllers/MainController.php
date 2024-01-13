@@ -1,7 +1,6 @@
 <?php
 
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Maincontroller extends CI_Controller
@@ -21,7 +20,7 @@ class Maincontroller extends CI_Controller
             $this->load->view('admin/footer');
         } else {
             $this->session->set_flashdata('error', 'Please Login First');
-            redirect('MainController/login');
+            redirect('login');
         }
     }
     public function login()
@@ -48,14 +47,14 @@ class Maincontroller extends CI_Controller
                 );
                 $this->session->set_userdata($forsession);
                 if ($this->session->userdata('id')) {
-                    redirect('MainController/index');
+                    redirect('index');
                     // print_r($data);
                 } else {
                     echo "Session is not created";
                 }
             } else {
                 $this->session->set_flashdata('error', 'email & password doesnot match');
-                redirect('MainController/login');
+                redirect('login');
             }
         }
     }
@@ -64,10 +63,10 @@ class Maincontroller extends CI_Controller
         if ($this->session->userdata('id')) {
             $this->session->unset_userdata('id');
             $this->session->sess_destroy();
-            redirect('MainController/login');
+            redirect('login');
         }
     }
-    public function category()
+    public function category($page=1)
     {
         if ($this->session->userdata('id')) {
             // $data = array();
@@ -78,12 +77,12 @@ class Maincontroller extends CI_Controller
             // $this->load->view('category', $data);
             $this->load->library('pagination');
 
-            $config['base_url'] = base_url('Maincontroller/category/');
+            $config['base_url'] = base_url('category/');
             $config['total_rows'] = $this->Modschool->getTotalRows();
             // print_r();
             // die;
             $config['per_page'] = 3;
-
+            // $this->uri->segment(3)
 
             $config['full_tag_open'] = '<ul class="pagination">';
             $config['full_tag_close'] = '</ul>';
@@ -101,7 +100,7 @@ class Maincontroller extends CI_Controller
 
             // echo $this->pagination->create_links();
             $data = array();
-            $data['user'] = $this->Modschool->getAlldetails($config['per_page'], $this->uri->segment(3));
+            $data['user'] = $this->Modschool->getAlldetails($config['per_page'], $page);
             $this->load->view("category", $data);
 
             $this->load->view('admin/footer');
@@ -109,7 +108,7 @@ class Maincontroller extends CI_Controller
         else
         {
             $this->session->set_flashdata('error', 'Please fill all the fields');
-            redirect('MainController/login');
+            redirect('login');
         }
         
         
@@ -139,7 +138,7 @@ class Maincontroller extends CI_Controller
         $this->form_validation->set_rules('name', 'Enter Category Name', 'required');
         if ($this->form_validation->run() == TRUE) {
             $data['name'] = $this->input->post('name');
-            // print_r($data);
+            // print_r($data);die;
             $insert = $this->Modschool->insertcategory($data);
             echo json_encode($insert);
         }
@@ -147,7 +146,7 @@ class Maincontroller extends CI_Controller
     public function deletecategory($id)
     {
         $this->Modschool->deletedata($id);
-        return redirect('MainController/category');
+        return redirect('category');
     }
 
     public function editcategory($id)
@@ -166,13 +165,13 @@ class Maincontroller extends CI_Controller
             $data['name'] = $this->input->post('name');
             // print_r($data);
             $this->Modschool->update($id, $data);
-            return redirect('MainController/category');
+            return redirect('category');
         }
     }
 
     ///For Class Section
 
-    public function class()
+    public function class($page=1)
     {
         if ($this->session->userdata('id')) {
             // $data = array();
@@ -183,7 +182,7 @@ class Maincontroller extends CI_Controller
             // $this->load->view('category', $data);
             $this->load->library('pagination');
 
-            $config['base_url'] = base_url('Maincontroller/class/');
+            $config['base_url'] = base_url('class/');
             $config['total_rows'] = $this->Modschool->getTotalRowsclass();
             // print_r();
             // die;
@@ -206,7 +205,7 @@ class Maincontroller extends CI_Controller
             // echo $this->pagination->create_links();
             $data = array();
             $data['category'] = $this->Modschool->viewcat();
-            $data['classes'] = $this->Modschool->getAlldetailsclass($config['per_page'], $this->uri->segment(3));
+            $data['classes'] = $this->Modschool->getAlldetailsclass($config['per_page'], $page);
             $this->load->view("class", $data);
 
             $this->load->view('admin/footer');
@@ -229,7 +228,7 @@ class Maincontroller extends CI_Controller
     public function deleteclass($id)
     {
         $this->Modschool->deleteclass($id);
-        return redirect('MainController/class');
+        return redirect('class');
     }
 
     public function editclass($id)
@@ -253,7 +252,7 @@ class Maincontroller extends CI_Controller
             $data['catname'] = $this->input->post('catname');
             // print_r($data);
             $this->Modschool->updateclass($id, $data);
-            return redirect('MainController/class');
+            return redirect('class');
         }
     }
 
@@ -275,6 +274,7 @@ class Maincontroller extends CI_Controller
         // print_r($data);
     }
 
+    //course start
     public function course()
     {
         if ($this->session->userdata('id')) {
@@ -288,7 +288,7 @@ class Maincontroller extends CI_Controller
             $this->load->view('admin/footer');
         } else {
             $this->session->set_flashdata('error', 'Please fill all the fields');
-            redirect('MainController/login');
+            redirect('login');
         }
     }
 
@@ -312,7 +312,7 @@ class Maincontroller extends CI_Controller
     public function deletecourse($id)
     {
         $this->Modschool->deletecourse($id);
-        return redirect('MainController/course');
+        return redirect('course');
     }
 
     public function editcourse($id)
@@ -338,10 +338,10 @@ class Maincontroller extends CI_Controller
             
             // print_r($data);
             $this->Modschool->updatecourse($id, $data);
-            return redirect('MainController/course');
+            return redirect('course');
         }
     }
-    public function student()
+    public function student($page=1)
     {
         if ($this->session->userdata('id')) {
             // $data = array();
@@ -354,7 +354,7 @@ class Maincontroller extends CI_Controller
 
             $this->load->library('pagination');
 
-            $config['base_url'] = base_url('Maincontroller/student/');
+            $config['base_url'] = base_url('student/');
             $config['total_rows'] = $this->Modschool->getTotalRowsstudent();
             // print_r();
             // die;
@@ -378,14 +378,14 @@ class Maincontroller extends CI_Controller
             $data['category'] = $this->Modschool->viewcat();
             $data['class'] = $this->Modschool->viewclass();
             
-            $data['user'] = $this->Modschool->getAlldetailsstudent($config['per_page'], $this->uri->segment(3));
+            $data['user'] = $this->Modschool->getAlldetailsstudent($config['per_page'], $page);
             $this->load->view("student", $data);
             // $this->load->view('student', $data);
             $this->load->view('admin/footer');
 
         } else {
             $this->session->set_flashdata('error', 'Please fill all the fields');
-            redirect('MainController/login');
+            redirect('login');
         }
     }
 
@@ -439,7 +439,7 @@ class Maincontroller extends CI_Controller
     public function deletestudent($id)
     {
         $this->Modschool->deletestudent($id);
-        return redirect('MainController/student');
+        return redirect('student');
     }
 
     public function editstudent($id)
@@ -460,6 +460,7 @@ class Maincontroller extends CI_Controller
             $data['name'] = $this->input->post('name');
             $data['fname'] = $this->input->post('fname');
             $data['email'] = $this->input->post('email');
+
             $data['category'] = $this->input->post('catname');
             $data['class'] = $this->input->post('classname');
             $data['dob'] = $this->input->post('dob');
@@ -467,9 +468,79 @@ class Maincontroller extends CI_Controller
             $data['joindate'] = $this->input->post('joindate');
             // print_r($data);
             $this->Modschool->updatestudent($id, $data);
-            return redirect('MainController/student');
+            return redirect('student');
         }
     }
+
+    public function staff()
+    {
+        if ($this->session->userdata('id')) {
+            $data = array();
+            // $data['users'] = $this->Modschool->viewdata();
+            $data['staff'] = $this->Modschool->getstaffdata();
+            $this->load->view('admin/header');
+            $this->load->view('admin/navtop');
+            $this->load->view('admin/navleft');
+            $this->load->view('staff/staff', $data);
+            $this->load->view('admin/footer');
+        } else {
+            $this->session->set_flashdata('error', 'Please fill all the fields');
+            redirect('login');
+        }
+    }
+
+    public function do_upload()
+        {
+            $this->form_validation->set_rules('name', 'Enter Student Name', 'required');
+            $this->form_validation->set_rules('email', 'Enter Email id', 'required');
+            $this->form_validation->set_rules('address', 'Enter Address', 'required');
+            $this->form_validation->set_rules('dob', 'Enter Date of Birth', 'required');
+            $this->form_validation->set_rules('phone', 'Enter Phone No.', 'required');
+            $this->form_validation->set_rules('doj', 'Enter Date of Joining', 'required');
+
+            if ($this->form_validation->run() == TRUE) {
+                $config['upload_path']          = './uploads/';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 100;
+                $config['max_width']            = 1024;
+                $config['max_height']           = 768;
+
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload('userfile'))
+                {
+                        $error = array('error' => $this->upload->display_errors());
+                        // echo "<pre>";
+                        // print_r($data);die;
+                        $this->load->view('test', $error);
+                }
+                else
+                {
+                        // $data = array('upload_data' => $this->upload->data());
+                        $post_image = $_FILES['userfile']['name'];
+                        // echo "<pre>";
+                        // print_r($data);die;
+                        $insert = $this->Modschool->create_post($post_image);
+                        // echo json_encode($insert);
+                        return redirect('staff');
+                }
+            }
+        }
+
+
+        public function attendance()
+        {
+            if ($this->session->userdata('id')) {
+                $this->load->view('admin/header');
+                $this->load->view('admin/navtop');
+                $this->load->view('admin/navleft');
+                $this->load->view('admin/attendance');
+                $this->load->view('admin/footer');
+            } else {
+                $this->session->set_flashdata('error', 'Please Login First');
+                redirect('login');
+            }
+        }
 
 
 
